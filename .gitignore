@@ -1,0 +1,35 @@
+# Node / JS
+node_modules/
+dist/
+build/
+coverage/
+.env
+.env.*
+
+# Logs / Reports
+logs/
+reports/
+allure-results/
+allure-report/
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+.cypress_cache/
+**/.cache/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Mobile / Appium (se gerar)
+*.apk
+*.ipa
+appium.log
+
+# K6 / resultados
+k6-results/
+*.out
