@@ -6,88 +6,91 @@
 
 ### Cenário 1 — Adicionar item com sucesso
 Dado que o usuário está na página de produto  
-Quando adicionar um item ao carrinho  
+Quando selecionar as opções do produto e adicionar um item ao carrinho  
 Então o sistema deve incluir o item no carrinho  
 E o subtotal deve ser atualizado corretamente  
 
 ---
 
-### Cenário 2 — Aplicação de cupom 10%
-Dado que o valor total esteja entre R$ 200,00 e R$ 600,00  
-Quando o carrinho for atualizado  
-Então deve ser aplicado automaticamente desconto de 10%  
-
----
-
-### Cenário 3 — Aplicação de cupom 15%
-Dado que o valor total seja acima de R$ 600,00  
-Quando o carrinho for atualizado  
-Então deve ser aplicado automaticamente desconto de 15%  
-
----
-
-### Cenário 4 — Limite de 10 unidades
-Dado que o usuário já adicionou 10 unidades do mesmo produto  
+### Cenário 2 — Limite máximo de 10 unidades
+Dado que o usuário já adicionou 10 unidades do mesmo produto ao carrinho  
 Quando tentar adicionar mais uma unidade  
 Então o sistema deve impedir a ação  
-E deve exibir mensagem informando limite máximo  
+E deve exibir mensagem informando limite máximo de unidades  
 
 ---
 
-### Cenário 5 — Limite de valor máximo
-Dado que o valor total ultrapasse R$ 990,00  
-Quando tentar adicionar novo produto  
-Então o sistema deve impedir a operação  
-E exibir mensagem informando limite máximo permitido  
+### Cenário 3 — Aplicação de desconto de 10%
+Dado que o valor total do carrinho esteja entre R$ 200,00 e R$ 600,00  
+Quando o carrinho for atualizado  
+Então o sistema deve aplicar desconto de 10%  
+
+---
+
+### Cenário 4 — Aplicação de desconto de 15%
+Dado que o valor total do carrinho seja acima de R$ 600,00  
+Quando o carrinho for atualizado  
+Então o sistema deve aplicar desconto de 15%  
 
 ---
 
 ## US002 — Login na plataforma
 
-### Cenário 1 — Login válido
-Dado que o usuário esteja ativo  
-Quando informar login e senha corretos  
-Então o sistema deve permitir o acesso  
+### Cenário 1 — Login com sucesso
+Dado que o usuário esteja na tela de login  
+Quando informar usuário e senha válidos  
+Então o sistema deve permitir o acesso à área logada  
 
 ---
 
-### Cenário 2 — Login inválido
-Quando o usuário informar login ou senha incorretos  
+### Cenário 2 — Login com credenciais inválidas
+Dado que o usuário esteja na tela de login  
+Quando informar usuário ou senha incorretos  
 Então o sistema deve exibir mensagem de erro  
 
 ---
 
-### Cenário 3 — Bloqueio por tentativas inválidas
-Dado que o usuário erre a senha 3 vezes  
-Então o sistema deve bloquear o login por 15 minutos  
+### Cenário 3 — Não bloquear com menos de 3 tentativas inválidas
+Dado que o usuário errou a senha 2 vezes consecutivas  
+Quando tentar realizar uma nova tentativa de login  
+Então o sistema deve permitir nova tentativa de login 
+
+---
+
+### Cenário 4 — Bloqueio após 3 tentativas inválidas
+Dado que o usuário errou a senha 3 vezes consecutivas  
+Quando tentar realizar novo login  
+Então o sistema deve bloquear o acesso por 15 minutos  
 
 ---
 
 ## US003 — API de Cupons
 
-### Cenário 1 — Listar cupons
-Dado que o admin esteja autenticado  
-Quando realizar requisição GET  
-Então o sistema deve retornar lista de cupons  
+### Cenário 1 — Listar cupons com sucesso
+Dado que o administrador esteja autenticado  
+Quando realizar uma requisição GET para listar cupons  
+Então o sistema deve retornar a lista de cupons cadastrados  
 
 ---
 
 ### Cenário 2 — Buscar cupom por ID
 Dado que exista um cupom cadastrado  
-Quando realizar requisição GET por ID  
-Então o sistema deve retornar os dados do cupom  
+E que o administrador esteja autenticado  
+Quando realizar uma requisição GET informando o ID do cupom  
+Então o sistema deve retornar os dados do cupom correspondente  
 
 ---
 
 ### Cenário 3 — Criar cupom com sucesso
-Dado que os campos obrigatórios estejam preenchidos  
-Quando realizar requisição POST  
-Então o sistema deve cadastrar o cupom  
+Dado que o administrador esteja autenticado  
+E que os campos obrigatórios estejam preenchidos corretamente  
+Quando realizar uma requisição POST para cadastrar cupom  
+Então o sistema deve cadastrar o cupom com sucesso  
 
 ---
 
-### Cenário 4 — Cupom duplicado
-Dado que já exista um cupom com o mesmo nome  
-Quando tentar cadastrar novo cupom  
+### Cenário 4 — Impedir cadastro de cupom duplicado
+Dado que já exista um cupom cadastrado com o mesmo código  
+Quando tentar cadastrar um novo cupom com o mesmo código 
 Então o sistema deve impedir o cadastro  
-E retornar erro apropriado  
+E deve retornar erro apropriado  

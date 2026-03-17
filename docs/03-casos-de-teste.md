@@ -4,13 +4,14 @@
 
 ## US001 — Adicionar item ao carrinho
 
-### CT-001 — Adicionar item com sucesso (AUTOMATIZAR - UI) caminho feliz
+### CT-001 — Adicionar item ao carrinho com sucesso (AUTOMATIZAR - UI) caminho feliz
 
 **Pré-condição:** Produto disponível em estoque  
 
 **Passos:**
 1. Acessar a página do produto
-2. Clicar em "Adicionar ao carrinho"
+2. Selecionar as opções do produto, se necessário
+3. Clicar em "Adicionar ao carrinho"
 
 **Resultado Esperado:**
 - Produto deve ser incluído no carrinho
@@ -18,100 +19,106 @@
 
 ---
 
-### CT-002 — Aplicar desconto de 10%
+### CT-002 — Validar limite máximo de 10 unidades negativo
+
+**Pré-condição:** Produto já adicionado 10 vezes ao carrinho  
+
+**Passos:**
+1. Tentar adicionar a 11ª unidade do mesmo produto
+
+**Resultado Esperado:**
+- Sistema deve impedir a ação
+- Deve exibir mensagem informando limite máximo de unidades
+
+---
+
+### CT-003 — Aplicar desconto de 10% alternativo
 
 **Pré-condição:** Carrinho com valor entre R$ 200,00 e R$ 600,00  
 
 **Passos:**
 1. Adicionar produtos até atingir valor dentro da faixa
-2. Verificar valor final
+2. Acessar o carrinho
+3. Verificar o valor final
 
 **Resultado Esperado:**
-- Sistema aplica desconto automático de 10%
+- Sistema deve aplicar desconto de 10%
 
 ---
 
-### CT-003 — Aplicar desconto de 15%
+### CT-004 — Aplicar desconto de 15% alternativo
 
 **Pré-condição:** Carrinho com valor acima de R$ 600,00  
 
 **Passos:**
 1. Adicionar produtos até ultrapassar R$ 600,00
-2. Verificar valor final
+2. Acessar o carrinho
+3. Verificar o valor final
 
 **Resultado Esperado:**
-- Sistema aplica desconto automático de 15%
-
----
-
-### CT-004 — Limite máximo de 10 unidades (AUTOMATIZAR - UI) negativo (limite 10 unidades)
-
-**Pré-condição:** Produto já adicionado 10 vezes  
-
-**Passos:**
-1. Tentar adicionar 11ª unidade
-
-**Resultado Esperado:**
-- Sistema impede ação
-- Exibe mensagem de erro
-
----
-
-### CT-005 — Limite máximo de R$ 990,00
-
-**Pré-condição:** Carrinho próximo de R$ 990,00  
-
-**Passos:**
-1. Tentar adicionar produto que ultrapasse o limite
-
-**Resultado Esperado:**
-- Sistema impede ação
-- Exibe mensagem informando limite máximo
+- Sistema deve aplicar desconto de 15%
 
 ---
 
 ## US002 — Login na plataforma
 
-### CT-006 — Login com sucesso (AUTOMATIZAR - UI) caminho feliz
+### CT-005 — Login com sucesso (AUTOMATIZAR - UI) caminho feliz
 
 **Passos:**
-1. Inserir login válido
-2. Inserir senha válida
+1. Acessar a tela de login
+2. Informar usuário válido
+3. Informar senha válida
+4. Clicar em entrar
+
+**Resultado Esperado:**
+- Usuário deve acessar a área logada
+
+---
+
+### CT-006 — Login com usuário ou senha inválidos negativo
+
+**Passos:**
+1. Acessar a tela de login
+2. Informar usuário ou senha incorretos
 3. Clicar em entrar
 
 **Resultado Esperado:**
-- Usuário acessa a área logada
+- Sistema deve exibir mensagem de erro
 
 ---
 
-### CT-007 — Login inválido
+### CT-007 — Não bloquear conta com menos de 3 tentativas inválidas alternativo
 
 **Passos:**
-1. Inserir login ou senha incorretos
-2. Clicar em entrar
+1. Acessar a tela de login
+2. Informar senha incorreta por 2 vezes
+3. Tentar realizar nova tentativa de login
 
 **Resultado Esperado:**
-- Sistema exibe mensagem de erro
+- Sistema não deve bloquear a conta
+- Deve permitir nova tentativa de login
 
 ---
 
-### CT-008 — Bloqueio após 3 tentativas (AUTOMATIZAR - UI) alternativo/negativo (bloqueio)
+### CT-008 — Bloquear conta após 3 tentativas inválidas (AUTOMATIZAR - UI) negativo
 
 **Passos:**
-1. Inserir senha incorreta três vezes
-2. Tentar logar novamente
+1. Acessar a tela de login
+2. Informar senha incorreta 3 vezes
+3. Informar as credenciais corretas para testar o bloqueio
 
 **Resultado Esperado:**
-- Sistema bloqueia login por 15 minutos
+- Sistema deve bloquear o login por 15 minutos
+- Deve exibir mensagem informando o bloqueio temporário
 
 ---
 
 ## US003 — API de Cupons
 
-### CT-009 — Listar cupons (AUTOMATIZAR - API) GET
+### CT-009 — Listar cupons com sucesso (AUTOMATIZAR - API) caminho feliz
 
 **Passos:**
-1. Enviar requisição GET autenticada
+1. Enviar requisição GET autenticada para listagem de cupons
 
 **Resultado Esperado:**
 - Retornar status 200
@@ -119,23 +126,36 @@
 
 ---
 
-### CT-010 — Criar cupom com sucesso (AUTOMATIZAR - API) POST sucesso
+### CT-010 — Buscar cupom por ID (AUTOMATIZAR - API) caminho feliz
+
+**Pré-condição:** Existir um cupom cadastrado  
 
 **Passos:**
-1. Enviar requisição POST com campos obrigatórios válidos
+1. Enviar requisição GET autenticada informando o ID de um cupom existente
 
 **Resultado Esperado:**
-- Retornar status 201
-- Cupom criado com sucesso
+- Retornar status 200
+- Retornar os dados do cupom correspondente
 
 ---
 
-### CT-011 — Cupom duplicado (AUTOMATIZAR - API) duplicado (se der tempo, ótimo)
+### CT-011 — Criar cupom com sucesso (AUTOMATIZAR - API) caminho feliz
 
 **Passos:**
-1. Criar cupom
-2. Tentar criar outro com mesmo nome
+1. Enviar requisição POST com os campos obrigatórios válidos
 
 **Resultado Esperado:**
-- Sistema retorna erro
-- Cupom não é criado
+- Retornar status 201
+- Cupom deve ser criado com sucesso
+
+---
+
+### CT-012 — Não permitir cadastro de cupom duplicado (AUTOMATIZAR - API) negativo
+
+**Passos:**
+1. Criar um cupom com sucesso
+2. Tentar criar outro cupom com o mesmo código
+
+**Resultado Esperado:**
+- Sistema deve retornar erro
+- Cupom não deve ser criado
