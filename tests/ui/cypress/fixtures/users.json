@@ -1,0 +1,10 @@
+{
+  "usuarioValido": {
+    "username": "aluno_ebac@teste.com",
+    "password": "teste@teste.com"
+  },
+  "usuarioInvalido": {
+    "username": "usuario_invalido",
+    "password": "senha_errada"
+  }
+}
