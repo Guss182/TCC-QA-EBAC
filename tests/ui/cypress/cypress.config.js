@@ -1,6 +1,12 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
+
+  video: true,
+  screenshotsFolder: '../../../docs/evidencias/ui/screenshots',
+  videosFolder: '../../../docs/evidencias/ui/videos',
+  trashAssetsBeforeRuns: true,
+
   e2e: {
     baseUrl: 'http://lojaebac.ebaconline.art.br',
     specPattern: 'e2e/**/*.cy.js',
