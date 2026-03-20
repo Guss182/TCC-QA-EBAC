@@ -29,6 +29,10 @@ Thumbs.db
 *.apk
 *.ipa
 appium.log
+tests/mobile/app/*.apks
+tests/mobile/app/*.aab
+tests/mobile/app/*.apk
+tools/*.jar
 
 # K6 / resultados
 k6-results/

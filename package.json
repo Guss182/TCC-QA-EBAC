@@ -6,18 +6,32 @@
     "cy:open": "cypress open --project ./tests/ui/cypress",
     "cy:run": "cypress run --project ./tests/ui/cypress",
     "cy:evidencias": "cypress run --project ./tests/ui/cypress --browser chrome",
+
     "api:test": "mocha \"tests/api/tests/**/*.js\" --timeout 10000",
+
     "perf:usuarios": "node scripts/criar-usuarios-performance.js",
     "perf:cupons": "k6 run performance/cupons.k6.js",
     "perf:login": "k6 run performance/login.k6.js",
     "perf:cupons:evidencias": "k6 run --summary-export docs/evidencias/performance/cupons-resumo.json performance/cupons.k6.js",
-    "perf:login:evidencias": "k6 run --summary-export docs/evidencias/performance/login-resumo.json performance/login.k6.js"
+    "perf:login:evidencias": "k6 run --summary-export docs/evidencias/performance/login-resumo.json performance/login.k6.js",
+
+    "mobile:test": "wdio run ./tests/mobile/wdio.android.conf.mjs",
+    "mobile:test:smoke": "wdio run ./tests/mobile/wdio.android.conf.mjs --spec ./tests/mobile/specs/smoke.spec.js",
+    "mobile:test:catalog": "wdio run ./tests/mobile/wdio.android.conf.mjs --suite catalog"
   },
   "devDependencies": {
+    "@wdio/appium-service": "^9.26.1",
+    "@wdio/cli": "^9.26.1",
+    "@wdio/local-runner": "^9.26.1",
+    "@wdio/mocha-framework": "^9.26.1",
+    "@wdio/spec-reporter": "^9.26.1",
+    "appium": "^3.2.2",
+    "appium-uiautomator2-driver": "^7.0.0",
     "chai": "^6.2.0",
     "cypress": "^15.12.0",
     "joi": "^18.0.2",
     "mocha": "^11.7.5",
-    "supertest": "^7.1.4"
+    "supertest": "^7.1.4",
+    "webdriverio": "^9.26.1"
   }
 }
