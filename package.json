@@ -5,6 +5,7 @@
   "scripts": {
     "cy:open": "cypress open --project ./tests/ui/cypress",
     "cy:run": "cypress run --project ./tests/ui/cypress",
+    "ui:test": "cypress run --project ./tests/ui/cypress --browser chrome",
     "cy:evidencias": "cypress run --project ./tests/ui/cypress --browser chrome",
 
     "api:test": "mocha \"tests/api/tests/**/*.js\" --timeout 10000",

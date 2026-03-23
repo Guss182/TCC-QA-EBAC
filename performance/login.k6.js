@@ -5,11 +5,11 @@ import exec from 'k6/execution'
 const BASE_URL = __ENV.BASE_URL || 'http://lojaebac.ebaconline.art.br'
 
 const usuarios = [
-  { username: 'perf_user_1773930623152_1', password: 'Teste@123456' },
-  { username: 'perf_user_1773930624214_2', password: 'Teste@123456' },
-  { username: 'perf_user_1773930625185_3', password: 'Teste@123456' },
-  { username: 'perf_user_1773930626042_4', password: 'Teste@123456' },
-  { username: 'perf_user_1773930626914_5', password: 'Teste@123456' }
+  { username: 'user1_ebac', password: 'psw!ebac@test' },
+  { username: 'user2_ebac', password: 'psw!ebac@test' },
+  { username: 'user3_ebac', password: 'psw!ebac@test' },
+  { username: 'user4_ebac', password: 'psw!ebac@test' },
+  { username: 'user5_ebac', password: 'psw!ebac@test' }
 ]
 
 export const options = {

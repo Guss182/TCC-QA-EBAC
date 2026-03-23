@@ -1,4 +1,4 @@
-name: CI - TCC QA EBAC
+name: CI - UI e API
 
 on:
   push:
@@ -9,17 +9,17 @@ on:
 
 jobs:
   api-tests:
-    name: Testes de API
+    name: API Tests
     runs-on: ubuntu-latest
 
     steps:
-      - name: Baixar código do repositório
+      - name: Checkout do projeto
         uses: actions/checkout@v4
 
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
           cache: npm
 
       - name: Instalar dependências
@@ -27,3 +27,27 @@ jobs:
 
       - name: Rodar testes de API
         run: npm run api:test
+
+  ui-tests:
+    name: UI Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Rodar testes de UI com Cypress
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          browser: chrome
+          command: npm run ui:test
