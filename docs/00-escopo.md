@@ -1,144 +1,192 @@
-# Escopo e Estratégia de Testes
+# 00 - Escopo do Projeto
 
-## 1. Objetivo
+## 1. Apresentação
 
-Este projeto tem como objetivo validar a qualidade das funcionalidades prioritárias do e-commerce EBAC Shop, cobrindo testes manuais e automatizados nas camadas Web, API e Mobile. A proposta é aplicar uma abordagem de Quality Engineering desde o planejamento até a execução, com foco na prevenção de defeitos, rastreabilidade dos cenários e apoio à entrega contínua.
+Este documento tem como finalidade definir o escopo do projeto final de qualidade de software, contemplando as frentes de automação Web, API, Mobile, Performance e Integração Contínua.
 
-## 2. Escopo do projeto
+O projeto foi estruturado com base nas histórias de usuário propostas para a EBAC Shop, buscando consolidar conhecimentos práticos de teste e automação em uma solução única, organizada e rastreável.
 
-O escopo deste trabalho contempla a validação funcional das seguintes frentes:
+---
 
-- Adição de itens ao carrinho
-- Login na plataforma
-- API de cupons
-- Catálogo de produtos
-- Painel Minha Conta
-- Meus Pedidos
-- Endereços
-- Detalhes da Conta
+## 2. Objetivo geral
 
-Também fazem parte do escopo:
-- elaboração de critérios de aceitação em Gherkin;
-- criação de casos de teste manuais;
-- automação de testes Web;
-- automação de testes de API;
-- automação mobile para catálogo de produtos;
-- execução em integração contínua com GitHub Actions;
-- testes de performance com k6.
+Desenvolver um projeto final de qualidade de software com cobertura de testes em diferentes camadas da aplicação, aplicando técnicas de planejamento, modelagem de testes, automação e geração de evidências.
 
-## 3. Itens fora de escopo
+---
 
-Para manter o projeto viável dentro do prazo, ficam fora do escopo:
-- testes aprofundados de segurança ofensiva;
-- testes de carga em toda a plataforma;
-- automação completa de todas as funcionalidades do sistema;
-- testes em múltiplos navegadores e múltiplos dispositivos móveis em larga escala;
-- integrações externas não descritas nas histórias fornecidas.
+## 3. Objetivos específicos
 
-## 4. Funcionalidades priorizadas
+- elaborar documentação funcional e de testes;
+- definir histórias de usuário e critérios de aceitação;
+- modelar casos de teste;
+- implementar testes automatizados de interface;
+- implementar testes automatizados de API;
+- implementar testes mobile com abordagem adaptada ao comportamento do aplicativo;
+- executar testes de performance;
+- versionar o projeto em repositório remoto;
+- configurar pipeline de integração contínua.
 
-### 4.1 Carrinho de compras
-Serão validadas as regras de inclusão de produtos no carrinho, limite máximo de 10 itens do mesmo produto, valor máximo de R$ 990,00 e aplicação de desconto promocional por faixa de valor.
+---
 
-### 4.2 Login na plataforma
-Serão validadas autenticação com credenciais válidas, tratamento de erro para login ou senha inválidos, restrição para usuários inativos e bloqueio temporário após três tentativas incorretas de senha.
+## 4. Escopo funcional
 
-### 4.3 API de cupons
-Serão validados os serviços de listagem e cadastro de cupons, autenticação, campos obrigatórios, prevenção de duplicidade de código e conformidade do contrato da API.
+O projeto considera funcionalidades da loja EBAC distribuídas entre Web, API e Mobile, com foco em fluxos representativos do sistema.
 
-## 5. Abordagem de testes
+### Funcionalidades principais consideradas
+- adicionar item ao carrinho;
+- autenticação de usuário;
+- listagem e navegação em catálogo de produtos;
+- consulta de recursos de API relacionados ao sistema;
+- execução de cenários de performance em endpoints selecionados.
 
-A estratégia adotada será híbrida, combinando testes manuais e automatizados.
+---
 
-Os testes manuais serão usados para:
-- levantamento inicial dos fluxos;
-- validação exploratória;
-- análise visual e comportamental da interface;
-- apoio na criação da massa de testes e dos cenários de regressão.
+## 5. Escopo de testes
 
-Os testes automatizados serão usados para:
-- validar fluxos críticos de negócio;
-- acelerar a regressão;
-- aumentar a confiabilidade das entregas;
-- permitir execução recorrente em pipeline de integração contínua.
+A cobertura do projeto foi organizada em cinco frentes principais:
 
-## 6. Tipos de teste
+### 5.1 Testes de Interface Web
+Validação de fluxos críticos da interface da aplicação Web, com foco em cenários funcionais e evidência visual de execução.
 
-Serão aplicados os seguintes tipos de teste:
-- teste funcional;
-- teste de regressão;
-- teste exploratório;
-- teste de API;
-- teste de usabilidade básica;
-- teste de compatibilidade básica;
-- teste de performance;
-- teste mobile funcional.
+### 5.2 Testes de API
+Validação de contratos, status code, regras de resposta e estrutura de dados da API.
 
-## 7. Técnicas de teste
+### 5.3 Testes Mobile
+Validação da navegação principal do aplicativo Android, considerando adaptação de abordagem devido à instabilidade observada no app fornecido.
 
-As principais técnicas utilizadas neste projeto serão:
-- partição de equivalência;
-- análise de valor limite;
-- tabela de decisão;
-- transição de estados, especialmente para regras de bloqueio de login;
-- testes baseados em fluxo principal, alternativo e negativo.
+### 5.4 Testes de Performance
+Execução de testes com k6 para análise de comportamento sob carga em fluxos selecionados.
 
-## 8. Ambientes de execução
+### 5.5 Integração Contínua
+Execução automatizada da suíte de API em pipeline no GitHub Actions.
+
+---
+
+## 6. Fora de escopo
+
+Não fazem parte do escopo deste projeto:
+
+- testes manuais exploratórios documentados em profundidade;
+- testes de segurança ofensiva como foco principal do projeto;
+- automação completa de fluxos mobile dependentes de estabilidade integral do aplicativo;
+- cobertura exaustiva de todas as funcionalidades da loja;
+- publicação de binários mobile no repositório remoto.
+
+---
+
+## 7. Premissas
+
+Para a execução do projeto, consideram-se as seguintes premissas:
+
+- disponibilidade dos ambientes utilizados pela EBAC;
+- acesso ao repositório remoto no GitHub;
+- ambiente local configurado com Node.js e dependências do projeto;
+- disponibilidade de emulador Android para a automação mobile;
+- funcionamento mínimo do aplicativo mobile para navegação entre áreas principais.
+
+---
+
+## 8. Riscos e restrições
+
+### 8.1 Instabilidade do aplicativo mobile
+Durante a execução do projeto, foi observada instabilidade no aplicativo Android disponibilizado, o que impactou diretamente a previsibilidade de alguns fluxos funcionais.
+
+Como mitigação, a automação mobile foi adaptada para validar a lógica de navegação, o acesso ao catálogo e a tentativa de acesso aos detalhes de produto, sem depender de comportamentos integralmente estáveis do aplicativo.
+
+### 8.2 Dependência de ambiente
+Parte das execuções depende de ambiente local configurado com Appium, Android Emulator e Java.
+
+### 8.3 Dependência de dados
+Alguns resultados podem variar conforme a massa de dados disponível no ambiente utilizado.
+
+---
+
+## 9. Ambientes de execução
 
 Os testes poderão ser executados:
+
 - no ambiente disponibilizado pela EBAC Shop;
-- em ambiente local com Docker, utilizando os containers da aplicação e banco de dados;
-- em pipeline automatizado no GitHub Actions.
+- em ambiente local configurado para desenvolvimento e automação;
+- em pipeline automatizado no GitHub Actions, para a suíte de API.
 
-## 9. Ferramentas propostas
+---
 
-Para este projeto, será adotada uma stack com foco em simplicidade, reaproveitamento de conhecimento e boa integração entre camadas:
+## 10. Ferramentas adotadas
 
-- Playwright com JavaScript para automação Web;
-- Supertest para automação de API;
-- Appium para automação Mobile;
+Para este projeto, foi adotada uma stack com foco em simplicidade, reaproveitamento de conhecimento e boa integração entre camadas:
+
+- Cypress com JavaScript para automação Web;
+- Supertest, Mocha, Chai e Joi para automação de API;
+- WebdriverIO e Appium para automação Mobile;
 - GitHub Actions para integração contínua;
 - k6 para testes de performance;
-- GitHub como repositório de código e evidências.
+- GitHub como repositório de código e apoio às evidências.
 
 A escolha por JavaScript busca padronizar a linguagem entre UI, API e parte da automação do ecossistema, reduzindo a complexidade do projeto.
 
-## 10. Padrões e boas práticas
+---
+
+## 11. Comparativo entre ferramentas de automação Web
+
+Para definição da ferramenta de automação Web, foram consideradas três opções amplamente conhecidas no mercado.
+
+### Cypress + JavaScript
+- configuração simples;
+- boa documentação;
+- excelente produtividade para projetos em JavaScript;
+- boa experiência para testes E2E em aplicações Web.
+
+### Playwright + JavaScript
+- ferramenta moderna e robusta;
+- boa cobertura cross-browser;
+- forte capacidade de automação;
+- porém com escopo mais amplo do que o necessário para este projeto.
+
+### Selenium
+- ferramenta consolidada no mercado;
+- ampla adoção;
+- alta flexibilidade;
+- porém com maior custo de configuração e manutenção para o contexto acadêmico do projeto.
+
+### Decisão adotada
+A ferramenta escolhida para a camada Web foi o Cypress, por apresentar melhor equilíbrio entre simplicidade, produtividade, clareza de implementação e aderência ao escopo do projeto.
+
+---
+
+## 12. Padrões e boas práticas
 
 Serão adotadas as seguintes boas práticas:
+
 - organização dos testes por funcionalidade;
-- separação entre testes, dados e apoio técnico;
-- uso de padrão de projeto para automação, como Page Objects na camada Web e abstração de serviços na camada de API;
-- geração de relatórios de execução;
+- separação entre testes, dados e arquivos de apoio;
+- uso de abstrações para facilitar manutenção;
+- geração de evidências e relatórios;
 - versionamento contínuo no GitHub;
-- rastreabilidade entre história, critério de aceitação, caso de teste e automação.
+- rastreabilidade entre história, critério de aceitação, caso de teste e automação;
+- adaptação técnica justificada sempre que houver limitação real de ambiente.
 
-## 11. Critérios de priorização para automação
-
-Os cenários priorizados para automação serão:
-- fluxos críticos do negócio;
-- cenários com alta repetição em regressão;
-- cenários de alto impacto em caso de falha;
-- pelo menos um caminho feliz e um caminho alternativo ou negativo por história, conforme exigência do trabalho.
-
-## 12. Riscos do projeto
-
-Os principais riscos identificados são:
-- indisponibilidade ou instabilidade do ambiente;
-- dificuldade para manter massa de dados consistente;
-- diferenças entre comportamento local e ambiente remoto;
-- limitação de tempo para cobrir toda a automação desejada;
-- mudanças não previstas no comportamento da aplicação.
+---
 
 ## 13. Entregáveis
 
-Ao final do projeto, serão entregues:
-- estratégia de testes;
-- critérios de aceitação em Gherkin;
-- casos de teste manuais;
-- repositório GitHub com estrutura do projeto;
-- testes automatizados de UI, API e Mobile;
-- pipeline de integração contínua;
-- testes de performance com k6;
+Os principais entregáveis do projeto são:
+
+- documentação do escopo;
+- histórias de usuário;
+- critérios de aceitação;
+- casos de teste;
+- automações Web;
+- automações de API;
+- automações mobile Android adaptadas;
+- scripts de performance;
+- pipeline CI;
 - evidências de execução;
-- documentação final consolidada no trabalho de conclusão.
+- repositório remoto com versionamento do projeto.
+
+---
+
+## 14. Conclusão
+
+O escopo definido para este projeto busca consolidar diferentes práticas de qualidade de software em uma entrega unificada, coerente e aderente à proposta do trabalho final.
+
+Mesmo diante de restrições identificadas no aplicativo mobile, o projeto mantém consistência técnica, documentação adequada e capacidade de demonstrar a aplicação prática dos conceitos estudados ao longo do curso.
