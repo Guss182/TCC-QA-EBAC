@@ -1,4 +1,5 @@
-import './commands';
+import 'allure-cypress'
+import './commands'
 
 afterEach(function () {
   if (this.currentTest.state === 'passed') {

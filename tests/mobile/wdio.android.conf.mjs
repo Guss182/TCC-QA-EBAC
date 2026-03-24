@@ -1,8 +1,10 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
+import allureReporter from '@wdio/allure-reporter'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+const allureOutputDir = path.resolve(__dirname, '../../allure-results')
 
 export const config = {
   runner: 'local',
@@ -30,7 +32,11 @@ export const config = {
     timeout: 60000
   },
 
-  reporters: ['spec'],
+  reporters: [
+    'spec',
+    ['allure', { outputDir: allureOutputDir }]
+  ],
+
   services: [],
 
   capabilities: [{
@@ -44,9 +50,17 @@ export const config = {
     'appium:noReset': false
   }],
 
-  afterTest: async function (test, context, { error, passed }) {
+  afterTest: async function (test, context, { passed }) {
     if (!passed) {
       try {
+        const screenshotBase64 = await browser.takeScreenshot()
+
+        allureReporter.addAttachment(
+          `Falha - ${test.title}`,
+          Buffer.from(screenshotBase64, 'base64'),
+          'image/png'
+        )
+
         await browser.saveScreenshot(`./tests/mobile/screenshots/${Date.now()}-${test.title}.png`)
       } catch {}
     }

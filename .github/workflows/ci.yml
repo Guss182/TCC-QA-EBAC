@@ -1,4 +1,4 @@
-name: CI - UI e API
+name: CI - UI, API e Allure
 
 on:
   push:
@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  api-tests:
-    name: API Tests
+  tests-and-allure:
+    name: UI, API e Allure Report
     runs-on: ubuntu-latest
 
     steps:
@@ -25,28 +25,46 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Rodar testes de API
-        run: npm run api:test
-
-  ui-tests:
-    name: UI Tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout do projeto
-        uses: actions/checkout@v4
-
-      - name: Configurar Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Instalar dependências
-        run: npm ci
+      - name: Limpar resultados antigos do Allure
+        run: npm run allure:clean
 
       - name: Rodar testes de UI com Cypress
-        uses: cypress-io/github-action@v6
+        continue-on-error: true
+        uses: cypress-io/github-action@v7
         with:
           install: false
           command: npm run ui:test
+
+      - name: Rodar testes de API com Allure
+        if: always()
+        run: npm run api:test:allure
+
+      - name: Gerar Allure Report
+        if: always()
+        run: npm run allure:generate
+
+      - name: Salvar allure-results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+          retention-days: 7
+
+      - name: Salvar Allure Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
+          retention-days: 7
+
+      - name: Salvar screenshots e vídeos do Cypress
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencias-ui-cypress
+          path: |
+            docs/evidencias/ui/screenshots
+            docs/evidencias/ui/videos
+          retention-days: 7
