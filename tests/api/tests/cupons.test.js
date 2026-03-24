@@ -31,7 +31,7 @@ describe('US003 - API de Cupons', () => {
     }
   })
 
-  it('CT-009 - Deve listar cupons com sucesso', async () => {
+  it('CT-012 - Deve listar cupons com sucesso', async () => {
     const response = await api('get', '/coupons')
 
     expect(response.status).to.equal(200)
@@ -40,7 +40,7 @@ describe('US003 - API de Cupons', () => {
     validarContrato(schemaListaCupons, response.body)
   })
 
-  it('CT-010 - Deve buscar cupom por ID com sucesso', async () => {
+  it('CT-013 - Deve buscar cupom por ID com sucesso', async () => {
     const listaResponse = await api('get', '/coupons')
 
     expect(listaResponse.status).to.equal(200)
@@ -57,7 +57,7 @@ describe('US003 - API de Cupons', () => {
     validarContrato(schemaCupom, response.body)
   })
 
-  it('CT-011 - Deve criar cupom com sucesso', async () => {
+  it('CT-014 - Deve criar cupom com sucesso', async () => {
     const response = await api('post', '/coupons')
       .send(cupom)
 
@@ -70,7 +70,7 @@ describe('US003 - API de Cupons', () => {
     validarContrato(schemaCupom, response.body)
   })
 
-  it('CT-012 - Não deve permitir cadastro de cupom duplicado', async () => {
+  it('CT-015 - Não deve permitir cadastro de cupom duplicado', async () => {
     const primeiroResponse = await api('post', '/coupons')
       .send(cupom)
 

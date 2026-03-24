@@ -6,5 +6,13 @@
   "usuarioInvalido": {
     "username": "usuario_invalido",
     "password": "senha_errada"
+  },
+  "usuarioInexistente": {
+    "username": "naoexiste_ebac_teste",
+    "password": "teste@teste.com"
+  },
+  "usuarioValidoComSenhaInvalida": {
+    "username": "aluno_ebac@teste.com",
+    "password": "senha_errada_123"
   }
 }
