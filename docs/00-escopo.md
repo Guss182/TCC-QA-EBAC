@@ -2,7 +2,7 @@
 
 ## 1. Apresentação
 
-Este documento tem como finalidade definir o escopo do projeto final de qualidade de software, contemplando as frentes de automação Web, API, Mobile, Performance e Integração Contínua.
+Este documento tem como finalidade definir o escopo do projeto final de qualidade de software, contemplando as frentes de automação Web, API, Mobile, Performance, Integração Contínua e consolidação de resultados com Allure Report.
 
 O projeto foi estruturado com base nas histórias de usuário propostas para a EBAC Shop, buscando consolidar conhecimentos práticos de teste e automação em uma solução única, organizada e rastreável.
 
@@ -10,7 +10,7 @@ O projeto foi estruturado com base nas histórias de usuário propostas para a E
 
 ## 2. Objetivo geral
 
-Desenvolver um projeto final de qualidade de software com cobertura de testes em diferentes camadas da aplicação, aplicando técnicas de planejamento, modelagem de testes, automação e geração de evidências.
+Desenvolver um projeto final de qualidade de software com cobertura de testes em diferentes camadas da aplicação, aplicando técnicas de planejamento, modelagem de testes, automação, geração de evidências e consolidação de resultados.
 
 ---
 
@@ -24,7 +24,8 @@ Desenvolver um projeto final de qualidade de software com cobertura de testes em
 - implementar testes mobile com abordagem adaptada ao comportamento do aplicativo;
 - executar testes de performance;
 - versionar o projeto em repositório remoto;
-- configurar pipeline de integração contínua.
+- configurar pipeline de integração contínua;
+- consolidar resultados das execuções com Allure Report.
 
 ---
 
@@ -37,19 +38,21 @@ O projeto considera funcionalidades da loja EBAC distribuídas entre Web, API e 
 - autenticação de usuário;
 - listagem e navegação em catálogo de produtos;
 - consulta de recursos de API relacionados ao sistema;
-- execução de cenários de performance em endpoints selecionados.
+- execução de cenários de performance em fluxos selecionados.
 
 ---
 
 ## 5. Escopo de testes
 
-A cobertura do projeto foi organizada em cinco frentes principais:
+A cobertura do projeto foi organizada em seis frentes principais:
 
 ### 5.1 Testes de Interface Web
-Validação de fluxos críticos da interface da aplicação Web, com foco em cenários funcionais e evidência visual de execução.
+Validação de fluxos críticos da interface da aplicação Web, com foco em cenários funcionais, cenários negativos, regras de negócio e evidência visual de execução.
+
+Parte dos cenários da camada Web foi mantida na automação com identificação `BUG:` no nome do teste, com a finalidade de demonstrar divergências observadas entre o comportamento esperado e o comportamento real da aplicação no ambiente disponibilizado.
 
 ### 5.2 Testes de API
-Validação de contratos, status code, regras de resposta e estrutura de dados da API.
+Validação de contratos, status code, regras de resposta e estrutura de dados da API de cupons.
 
 ### 5.3 Testes Mobile
 Validação da navegação principal do aplicativo Android, considerando adaptação de abordagem devido à instabilidade observada no app fornecido.
@@ -58,7 +61,10 @@ Validação da navegação principal do aplicativo Android, considerando adapta�
 Execução de testes com k6 para análise de comportamento sob carga em fluxos selecionados.
 
 ### 5.5 Integração Contínua
-Execução automatizada da suíte de API em pipeline no GitHub Actions.
+Execução automatizada das suítes do projeto em pipeline no GitHub Actions, com geração de artifacts e apoio à rastreabilidade das execuções.
+
+### 5.6 Consolidação de Resultados
+Centralização dos resultados das execuções automatizadas por meio do Allure Report, reunindo evidências das camadas de UI, API e Mobile em um único relatório.
 
 ---
 
@@ -70,7 +76,8 @@ Não fazem parte do escopo deste projeto:
 - testes de segurança ofensiva como foco principal do projeto;
 - automação completa de fluxos mobile dependentes de estabilidade integral do aplicativo;
 - cobertura exaustiva de todas as funcionalidades da loja;
-- publicação de binários mobile no repositório remoto.
+- validação completa de regras que dependam de massa controlada não disponibilizada no ambiente de testes;
+- publicação automatizada do relatório em ambiente externo além dos artifacts gerados na pipeline.
 
 ---
 
@@ -82,7 +89,8 @@ Para a execução do projeto, consideram-se as seguintes premissas:
 - acesso ao repositório remoto no GitHub;
 - ambiente local configurado com Node.js e dependências do projeto;
 - disponibilidade de emulador Android para a automação mobile;
-- funcionamento mínimo do aplicativo mobile para navegação entre áreas principais.
+- funcionamento mínimo do aplicativo mobile para navegação entre áreas principais;
+- funcionamento do ambiente local para geração do Allure Report.
 
 ---
 
@@ -97,17 +105,26 @@ Como mitigação, a automação mobile foi adaptada para validar a lógica de na
 Parte das execuções depende de ambiente local configurado com Appium, Android Emulator e Java.
 
 ### 8.3 Dependência de dados
-Alguns resultados podem variar conforme a massa de dados disponível no ambiente utilizado.
+Alguns resultados variam conforme a massa de dados disponível no ambiente utilizado.
+
+### 8.4 Divergência entre regra esperada e comportamento real
+Durante as execuções automatizadas, algumas regras de negócio descritas para a aplicação não se confirmaram no ambiente disponibilizado, como bloqueio após tentativas inválidas de login, aplicação automática de descontos por faixa de valor no carrinho e limitação de valor total do carrinho.
+
+Esses comportamentos foram mantidos no projeto como evidências de não conformidade identificadas durante a execução dos testes automatizados.
+
+### 8.5 Dependência da execução automatizada para geração de evidências
+Parte das evidências do projeto, incluindo screenshots, vídeos, arquivos exportados e resultados consolidados do Allure, depende da execução prévia das suítes automatizadas no ambiente local ou na pipeline.
 
 ---
 
 ## 9. Ambientes de execução
 
-Os testes poderão ser executados:
+Os testes são executados:
 
 - no ambiente disponibilizado pela EBAC Shop;
 - em ambiente local configurado para desenvolvimento e automação;
-- em pipeline automatizado no GitHub Actions, para a suíte de API.
+- em pipeline automatizado no GitHub Actions, para as suítes de UI e API;
+- em ambiente local para geração e visualização do Allure Report.
 
 ---
 
@@ -120,6 +137,7 @@ Para este projeto, foi adotada uma stack com foco em simplicidade, reaproveitame
 - WebdriverIO e Appium para automação Mobile;
 - GitHub Actions para integração contínua;
 - k6 para testes de performance;
+- Allure Report para consolidação dos resultados das execuções;
 - GitHub como repositório de código e apoio às evidências.
 
 A escolha por JavaScript busca padronizar a linguagem entre UI, API e parte da automação do ecossistema, reduzindo a complexidade do projeto.
@@ -155,15 +173,17 @@ A ferramenta escolhida para a camada Web foi o Cypress, por apresentar melhor eq
 
 ## 12. Padrões e boas práticas
 
-Serão adotadas as seguintes boas práticas:
+Foram adotadas as seguintes boas práticas:
 
 - organização dos testes por funcionalidade;
 - separação entre testes, dados e arquivos de apoio;
 - uso de abstrações para facilitar manutenção;
-- geração de evidências e relatórios;
+- geração de evidências e registros de execução;
 - versionamento contínuo no GitHub;
 - rastreabilidade entre história, critério de aceitação, caso de teste e automação;
-- adaptação técnica justificada sempre que houver limitação real de ambiente.
+- identificação de cenários com divergência real da aplicação por meio do prefixo `BUG:`;
+- adaptação técnica justificada sempre que houver limitação real de ambiente;
+- consolidação de resultados com Allure Report.
 
 ---
 
@@ -179,8 +199,9 @@ Os principais entregáveis do projeto são:
 - automações de API;
 - automações mobile Android adaptadas;
 - scripts de performance;
-- pipeline CI;
+- pipeline de integração contínua;
 - evidências de execução;
+- resultados consolidados em Allure Report;
 - repositório remoto com versionamento do projeto.
 
 ---
@@ -189,4 +210,4 @@ Os principais entregáveis do projeto são:
 
 O escopo definido para este projeto busca consolidar diferentes práticas de qualidade de software em uma entrega unificada, coerente e aderente à proposta do trabalho final.
 
-Mesmo diante de restrições identificadas no aplicativo mobile, o projeto mantém consistência técnica, documentação adequada e capacidade de demonstrar a aplicação prática dos conceitos estudados ao longo do curso.
+Mesmo diante de restrições identificadas no aplicativo mobile e de divergências observadas entre regras esperadas e comportamento real do ambiente, o projeto mantém consistência técnica, documentação adequada e capacidade de demonstrar a aplicação prática dos conceitos estudados ao longo do curso, incluindo a geração e consolidação de evidências das execuções automatizadas.
